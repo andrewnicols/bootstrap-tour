@@ -1,5 +1,5 @@
 /* ========================================================================
- * bootstrap-tour - v0.10.2
+ * bootstrap-tour - v0.10.3
  * http://bootstraptour.com
  * ========================================================================
  * Copyright 2012-2015 Ulrich Sossou
@@ -19,7 +19,9 @@
  * ========================================================================
  */
 
-(function($, window) {
+var factory;
+
+factory = (function($) {
   var Tour, document;
   document = window.document;
   Tour = (function() {
@@ -923,5 +925,13 @@
     return Tour;
 
   })();
-  return window.Tour = Tour;
-})(jQuery, window);
+  return Tour;
+});
+
+if (typeof define === 'function' && (define.amd != null)) {
+  define(['jquery'], factory);
+} else if (typeof exports === 'object') {
+  module.exports = factory(jQuery);
+} else {
+  window.Tour = factory(jQuery);
+}
